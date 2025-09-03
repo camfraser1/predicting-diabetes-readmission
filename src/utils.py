@@ -31,7 +31,7 @@ from imblearn.under_sampling import RandomUnderSampler
 from xgboost import XGBClassifier
 
 # Transformers
-from transformers import GlobalImputer, FeatureEngineer, SMOTENCSampler, UnderSampler, DiagnosisCategoriser, CategorySetter
+from .transformers import GlobalImputer, FeatureEngineer, SMOTENCSampler, UnderSampler, DiagnosisCategoriser, CategorySetter
 
 def view_categorical_variables(X):
     '''Prints out each categorical variable of the dataframe, along with its unique values'''
@@ -45,7 +45,11 @@ def view_categorical_variables(X):
     
     # Print out unique values to be assessed
     for col in cat_cols:
-        print(f'\n{col} -> {X[col].unique()}')
+
+        unique_vals = X[col].unique()
+        sample_vals = unique_vals[:5]
+
+        print(f'\n{col} -> {len(unique_vals)} unique values: {list(sample_vals)} + ...')
 
     pass
 
